@@ -29,7 +29,6 @@ Booking is open on Sunday for the next Monday–Sunday week. Students can select
 4. `venv\\Scripts\\Activate.ps1`
 5. `pip install -r requirements.txt`
 6. `python app.py`
-7. Open http://127.0.0.1:5000
 
 ## Login accounts
 - Student: register using an email ending in `@iiit-bh.ac.in`; college ID is derived from the email prefix.
