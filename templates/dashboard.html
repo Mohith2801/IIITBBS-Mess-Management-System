@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block title %}Student Dashboard{% endblock %}{% block content %}
+<div class="page-heading"><div class="eyebrow">STUDENT PORTAL</div><h1 class="section-title">Hello, {{session.get('name')}} 👋</h1><p>Your student details, meal bookings and mess fee summary.</p></div>
+<div class="row g-3 mb-4">
+<div class="col-md-3"><div class="stat-card"><span>College ID</span><strong class="student-id-value">{{session.get('college_id')}}</strong></div></div>
+<div class="col-md-3"><div class="stat-card"><span>Total mess due</span><strong>₹{{due}}</strong><small class="text-secondary">Based on all meals booked</small></div></div>
+<div class="col-md-3"><div class="stat-card"><span>Upcoming week booking</span><strong>₹{{upcoming_due}}</strong></div></div>
+<div class="col-md-3"><div class="stat-card"><span>Total booked meals</span><strong>{{bookings|length}}</strong></div></div>
+</div>
+<div class="content-card mb-4"><div class="d-flex justify-content-between flex-wrap gap-2"><div><h5>Student details</h5><p class="text-secondary mb-0">{{session.get('name')}} · {{session.get('college_id')}}@iiit-bh.ac.in</p></div><a class="btn btn-primary" href="{{url_for('book_meals')}}">Book next week</a></div></div>
+<div class="content-card mb-4"><h5>Meal booking and attendance history</h5><p class="text-secondary small">Your due is calculated when meals are booked. Attendance only records whether you collected the meal; it never changes your booking or fee.</p><div class="table-responsive"><table class="table align-middle"><thead><tr><th>Meal date</th><th>Meal</th><th>Booked on</th><th>Fee</th><th>Attendance</th></tr></thead><tbody>
+{% for b in bookings %}<tr><td>{{b.meal_date}}</td><td>{{b.meal_type}}</td><td>{{b.booked_at[:16].replace('T',' ')}}</td><td>₹{{b.price}}</td><td><span class="status">{{b.attendance_status}}</span></td></tr>{% else %}<tr><td colspan="5" class="text-secondary">No meals booked yet.</td></tr>{% endfor %}
+</tbody></table></div></div>
+<div class="content-card"><h5>My recent complaints</h5>{% for c in complaints %}<div class="record-row"><b>{{c.subject}}</b><span>{{c.status}}</span></div>{% else %}<p class="text-secondary">No complaints submitted.</p>{% endfor %}</div>{% endblock %}

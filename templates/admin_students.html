@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block title %}Student Accounts & Mess Due{% endblock %}{% block content %}
+<div class="page-heading"><div class="eyebrow">MESS MANAGEMENT</div><h1 class="section-title">Students and mess dues</h1><p>All registered students, total meals booked and outstanding mess fee calculated from bookings.</p></div>
+<div class="content-card"><div class="table-responsive"><table class="table align-middle"><thead><tr><th>Student name</th><th>College ID</th><th>Email</th><th>Meals booked</th><th>Total mess due</th><th>Booking history</th></tr></thead><tbody>
+{% for s in students %}<tr><td><b>{{s.name}}</b></td><td>{{s.college_id}}</td><td>{{s.email}}</td><td>{{s.booked_meals}}</td><td><b>₹{{s.due}}</b></td><td><a class="btn btn-sm btn-outline-success" href="{{url_for('admin_student_bookings',student_id=s.id)}}">View bookings</a></td></tr>{% else %}<tr><td colspan="6" class="text-secondary">No student accounts registered.</td></tr>{% endfor %}
+</tbody></table></div></div>{% endblock %}
